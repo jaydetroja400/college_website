@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>College Registration Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #eef2f3;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 400px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 20px;
+      background: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>College Registration Form</h2>
+    <form onsubmit="return validateForm()">
+      <label for="name">Full Name:</label>
+      <input type="text" id="name" placeholder="Enter your full name">
+
+      <label for="email">Email:</label>
+      <input type="text" id="email" placeholder="Enter your email">
+
+      <label for="phone">Phone Number:</label>
+      <input type="text" id="phone" placeholder="Enter 10-digit phone number">
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" placeholder="Enter password">
+
+      <label for="confirmPassword">Confirm Password:</label>
+      <input type="password" id="confirmPassword" placeholder="Re-enter password">
+
+      <button type="submit">Register</button>
+    </form>
+  </div>
+
+  <script>
+    function validateForm() {
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const confirmPassword = document.getElementById("confirmPassword").value.trim();
+
+      // 1️⃣ All fields required
+      if (!name || !email || !phone || !password || !confirmPassword) {
+        alert("All fields are required!");
+        return false;
+      }
+
+      // 2️⃣ Email pattern
+      const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
+      if (!emailPattern.test(email)) {
+        alert("Invalid email format!");
+        return false;
+      }
+
+      // 3️⃣ Phone number pattern (exactly 10 digits)
+      const phonePattern = /^[0-9]{10}$/;
+      if (!phonePattern.test(phone)) {
+        alert("Phone number must be exactly 10 digits!");
+        return false;
+      }
+
+      // 4️⃣ Password length
+      if (password.length < 8) {
+        alert("Password must be at least 8 characters long!");
+        return false;
+      }
+
+      // 5️⃣ Password pattern (uppercase, lowercase, number, special character)
+      const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+      if (!passwordPattern.test(password)) {
+        alert("Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character!");
+        return false;
+      }
+
+      // 6️⃣ Confirm password check
+      if (password !== confirmPassword) {
+        alert("Passwords do not match!");
+        return false;
+      }
+
+      // ✅ Success
+      alert("Registration Successful!");
+      return true;
+    }
+  </script>
+
+</body>
+</html>
